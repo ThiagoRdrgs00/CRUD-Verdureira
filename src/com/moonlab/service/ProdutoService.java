@@ -18,7 +18,7 @@ public class ProdutoService {
     }
 
     public void listarProduto(List<ProdutoEntity> produtos) {
-        double valorTotalGeral = 0;
+        double[] valorTotalGeral = {0};
         produtos.forEach(produto -> {
 
             System.out.println("Nome: " + produto.getNome());
@@ -26,10 +26,9 @@ public class ProdutoService {
             System.out.println("Valor Unitário: " + produto.getValorUnitario());
             System.out.println("Valor Total Produto: " + produto.getQuantidade() * produto.getValorUnitario());
             System.out.println("-----------------------------------");
-
-            //valorTotalGeral. += (produto.getQuantidade() * produto.getValorUnitario());
+            valorTotalGeral[0] += (produto.getQuantidade() * produto.getValorUnitario());
         });
-        System.out.println("Valor Total Geral: " + valorTotalGeral);
+        System.out.println("Valor Total Geral: " + valorTotalGeral[0]);
         System.out.println();
     }
 
