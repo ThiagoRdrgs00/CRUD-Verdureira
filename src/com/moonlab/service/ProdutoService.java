@@ -18,16 +18,20 @@ public class ProdutoService {
     }
 
     public void listarProduto(List<ProdutoEntity> produtos) {
-        double[] valorTotalGeral = {0};
+        double valorTotalGeral[] = new double[1];
+        int quantidadeTotalGeral[] = new int[1];
         produtos.forEach(produto -> {
+            //Por algum motivo, variaveis não funcionam dentro de uma lambda, e por algum outro motivo, vetores funcionam, por conta disso foi usado vetor
+            quantidadeTotalGeral[0] += produto.getQuantidade(); //Faz a soma das quantidades
+            valorTotalGeral[0] += (produto.getQuantidade() * produto.getValorUnitario()); //Faz a soma dos valores
 
             System.out.println("Nome: " + produto.getNome());
             System.out.println("Quantidade: " + produto.getQuantidade());
             System.out.println("Valor Unitário: " + produto.getValorUnitario());
             System.out.println("Valor Total Produto: " + produto.getQuantidade() * produto.getValorUnitario());
             System.out.println("-----------------------------------");
-            valorTotalGeral[0] += (produto.getQuantidade() * produto.getValorUnitario());
         });
+        System.out.println("Quantidade Total Geral: " + quantidadeTotalGeral[0]);
         System.out.println("Valor Total Geral: " + valorTotalGeral[0]);
         System.out.println();
     }
@@ -44,17 +48,61 @@ public class ProdutoService {
     }
 
     public ProdutoEntity editarProduto(ProdutoEntity produtoEntity) {
-        System.out.print("Informe o nome do produto: ");
-        String nome = input.nextLine();
-        System.out.println("Informe a quantidade do produto: ");
-        int quantidade = input.nextInt();
-        System.out.print("Informe o valor unitário do produto: ");
-        double valorUnitario = input.nextDouble();
+        boolean repetir = true;
+        ProdutoEntity produtoEditado = new ProdutoEntity();
 
+        do {
+            System.out.println("Qual opção deseja editar?");
+            System.out.println("1 - Nome");
+            System.out.println("2 - Quantidade");
+            System.out.println("3 - Valor Unitário");
+            System.out.println("0 - Encerar edição e salvar produto");
+            int opcaoEditar = input.nextInt();
+
+            switch (opcaoEditar) {
+                case 1:
+                    System.out.println("Informe o nome do produto: ");
+                    input.nextLine();
+                    String nome = input.nextLine();
+                    produtoEditado = editarProdutoNome(produtoEntity, nome);
+                    break;
+
+                case 2:
+                    System.out.println("Informe a quantidade do produto: ");
+                    int quantidade = input.nextInt();
+                    produtoEditado = editarProdutoQuantidade(produtoEntity, quantidade);
+                    break;
+
+                case 3:
+                    System.out.print("Informe o valor unitário do produto: ");
+                    double valorUnitario = input.nextDouble();
+                    produtoEditado = editarProdutoValorUnitario(produtoEntity, valorUnitario);
+                    break;
+
+                case 0:
+                    repetir = false;
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        } while (repetir) ;
+        return produtoEditado;
+    }
+
+    public ProdutoEntity editarProdutoNome(ProdutoEntity produtoEntity, String nome) {
         produtoEntity.setNome(nome);
-        produtoEntity.setQuantidade(quantidade);
-        produtoEntity.setValorUnitario(valorUnitario);
+        return produtoEntity;
+    }
 
+    public ProdutoEntity editarProdutoQuantidade(ProdutoEntity produtoEntity, int quantidade) {
+        produtoEntity.setQuantidade(quantidade);
+        return produtoEntity;
+    }
+
+    public ProdutoEntity editarProdutoValorUnitario(ProdutoEntity produtoEntity, double valorUnitario) {
+        produtoEntity.setValorUnitario(valorUnitario);
         return produtoEntity;
     }
 

@@ -23,11 +23,11 @@ public class App {
 
         do{
             System.out.println("---MENU---");
-            System.out.println("1 - Cadastrar pessoa");
-            System.out.println("2 - Listar pessoas");
-            System.out.println("3 - Buscar pessoa");
-            System.out.println("4 - Editar pessoa");
-            System.out.println("5 - Remover pessoa");
+            System.out.println("1 - Cadastrar produto");
+            System.out.println("2 - Listar produto");
+            System.out.println("3 - Buscar produto");
+            System.out.println("4 - Editar produto");
+            System.out.println("5 - Remover produto");
             System.out.println("0 - Encerrar a aplicação");
             System.out.print("Informe a opção desejada: ");
             opcao = input.nextInt();
@@ -45,6 +45,7 @@ public class App {
 
                     produtos.add(produtoController.cadastrarProduto(nome, quantidade, valorUnitario));
                     break;
+
                 case 2:
                     System.out.println("---Listar---");
                     if (produtos.isEmpty()) {
@@ -79,6 +80,8 @@ public class App {
                     ProdutoEntity produtoEntity = produtos.get(id);
                     ProdutoEntity produtoEntityEditado = produtoController.editarProduto(produtoEntity);
                     produtos.set(id, produtoEntityEditado);
+                    break;
+
                 case 5:
                     System.out.println("---Remover---");
                     System.out.println("Informe o id do produto: ");
@@ -93,6 +96,7 @@ public class App {
 
                 case 0:
                     repetir = false;
+                    break;
 
                 default:
                     System.out.println("Opção inválida!");
