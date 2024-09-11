@@ -5,6 +5,16 @@ public class ProdutoEntity {
     private int quantidade;
     private double valorUnitario;
 
+    public ProdutoEntity() {
+
+    }
+
+    public ProdutoEntity(String nome, int quantidade, double valorUnitario) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.valorUnitario = valorUnitario;
+    }
+
     public String getNome() {
         return nome;
     }

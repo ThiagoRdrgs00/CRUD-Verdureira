@@ -8,11 +8,7 @@ import java.util.Scanner;
 public class ProdutoService {
     Scanner input = new Scanner(System.in);
     public ProdutoEntity cadastrarProduto(String nome, int quantidade, double valorUnitario) {
-        ProdutoEntity produtoEntity = new ProdutoEntity();
-
-        produtoEntity.setNome(nome);
-        produtoEntity.setQuantidade(quantidade);
-        produtoEntity.setValorUnitario(valorUnitario);
+        ProdutoEntity produtoEntity = new ProdutoEntity(nome, quantidade, valorUnitario);
 
         return produtoEntity;
     }
